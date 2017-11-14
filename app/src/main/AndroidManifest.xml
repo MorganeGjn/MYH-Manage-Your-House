@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Eclairage" />
+        <activity android:name=".Parametres" />
     </application>
 
 </manifest>

@@ -17,9 +17,19 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Eclairage.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(MainActivity.this, Eclairage.class);
+                startActivity(intent1);
             }
         });
+        final Button ButtonParametre = (Button) findViewById(R.id.buttonParametres);
+        ButtonParametre.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(MainActivity.this, Parametres.class);
+                startActivity(intent2);
+            }
+        });
+
     }
 }
