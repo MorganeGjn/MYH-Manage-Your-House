@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Button ButtonEclairage = (Button) findViewById(R.id.buttonEclairage);
+        final ImageButton ButtonEclairage = (ImageButton) findViewById(R.id.buttonEclairage);
         ButtonEclairage.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
-        final Button ButtonParametre = (Button) findViewById(R.id.buttonParametres);
+        final ImageButton ButtonParametre = (ImageButton) findViewById(R.id.buttonParametres);
         ButtonParametre.setOnClickListener(new View.OnClickListener() {
 
             @Override
