@@ -32,5 +32,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final Button ButtonSonnette = (Button) findViewById(R.id.buttonSonnette);
+        ButtonSonnette.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent3 = new Intent(MainActivity.this, Sonnette.class);
+                startActivity(intent3);
+            }
+        });
     }
 }

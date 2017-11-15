@@ -28,17 +28,14 @@
         android:id="@+id/buttonEclairage"
         android:layout_width="126dp"
         android:layout_height="98dp"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="164dp"
         android:background="@color/GreenButton"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/idea"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        tools:layout_editor_absoluteY="188dp"
-        tools:layout_editor_absoluteX="113dp" />
+        app:layout_constraintRight_toRightOf="parent" />
 
     <ImageButton
         android:id="@+id/buttonParametres"
