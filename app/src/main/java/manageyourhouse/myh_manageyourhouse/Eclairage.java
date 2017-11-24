@@ -16,6 +16,6 @@ public class Eclairage extends AppCompatActivity {
         setContentView(R.layout.eclairage);
         final RecyclerView rv = (RecyclerView) findViewById(R.id.ListePiece);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new MyAdapter());
+        rv.setAdapter(new MyAdapterEclairage());
     }
 }

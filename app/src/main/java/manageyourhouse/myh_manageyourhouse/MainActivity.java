@@ -9,8 +9,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import java.io.IOException;
+
 
 public class MainActivity extends AppCompatActivity {
+
+
+
+
+
+
+    public static ClientTCP client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                try {
+                    client = new ClientTCP("192.168.1.1", 12345);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Intent intent1 = new Intent(MainActivity.this, Eclairage.class);
                 startActivity(intent1);
             }

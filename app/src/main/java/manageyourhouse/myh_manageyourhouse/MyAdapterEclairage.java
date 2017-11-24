@@ -1,6 +1,5 @@
 package manageyourhouse.myh_manageyourhouse;
 
-import android.util.Pair;
 import android.support.v7.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -8,14 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import manageyourhouse.myh_manageyourhouse.MainActivity;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.MyViewHolder> {
+
+    Pieces Salon = new Pieces("Salon", false, false, 0);
+    Pieces Toilette = new Pieces("Toilette", false, false, 0);
+    Pieces Chambre = new Pieces("Chambre", false, false, 0);
+    Pieces Cuisine = new Pieces("Cuisine", false, false, 0);
+
+    List<Pieces> Pieces = Arrays.asList(Salon, Toilette, Chambre, Cuisine);
 
     private final List<String> characters = Arrays.asList(
-            "Salon",
-            "Toilette"
+            Salon.getName(),
+            Toilette.getName(),
+            Chambre.getName(),
+            Cuisine.getName()
     );
 
     @Override
@@ -39,17 +49,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView name;
-
         private String currentPair;
 
         public MyViewHolder(final View itemView) {
             super(itemView);
-
             name = ((TextView) itemView.findViewById(R.id.name));
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    try {
+                        MainActivity.client.SendSetStateLight(1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     new AlertDialog.Builder(itemView.getContext())
                             .setTitle(currentPair)
                             .show();
