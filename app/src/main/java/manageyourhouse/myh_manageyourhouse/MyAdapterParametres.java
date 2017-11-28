@@ -3,10 +3,13 @@ package manageyourhouse.myh_manageyourhouse;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.app.AlertDialog;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,6 +18,7 @@ import java.util.List;
 
 import static manageyourhouse.myh_manageyourhouse.R.id.action_context_bar;
 import static manageyourhouse.myh_manageyourhouse.R.id.none;
+import static manageyourhouse.myh_manageyourhouse.R.layout.inputminutes;
 
 public class MyAdapterParametres extends RecyclerView.Adapter<MyAdapterParametres.MyViewHolder> {
 
@@ -60,7 +64,7 @@ public class MyAdapterParametres extends RecyclerView.Adapter<MyAdapterParametre
             super(itemView);
             Pieces piece = Pieces.get(1);
 
-            name = ((TextView) itemView.findViewById(R.id.name));
+            name = itemView.findViewById(R.id.name);
             for (int i = 0; i <Pieces.size(); i++){
                 if (currentPair == Pieces.get(i).getName()){
                     piece = Pieces.get(i);
@@ -73,11 +77,8 @@ public class MyAdapterParametres extends RecyclerView.Adapter<MyAdapterParametre
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    final EditText min = ((EditText) itemView.findViewById(R.id.minutes));
-                    //final EditText min = (EditText) ((AlertDialog) findViewById(R.id.minutes);
-                    AlertDialog dialog = new AlertDialog.Builder(itemView.getContext())
+                   AlertDialog dialog = new AlertDialog.Builder(itemView.getContext())
                             .setTitle(currentPair)
-                            .setView(min)
                             .setMultiChoiceItems(items, Notif, new DialogInterface.OnMultiChoiceClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
@@ -92,12 +93,16 @@ public class MyAdapterParametres extends RecyclerView.Adapter<MyAdapterParametre
                                 }
                             })
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            //  Your code when user clicked on OK
-                            //  You can write the code  to save the selected item here
-                        }
-                    }).create();
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            //  Your code when user clicked on OK
+                                            //  You can write the code  to save the selected item here
+                                        }
+                                    })
+                            .create();
+                    final EditText min = (EditText)itemView.findViewById(R.id.minutes);
+
+                    dialog.setView(min);
                     dialog.show();
                 }
             });

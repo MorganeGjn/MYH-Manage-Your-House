@@ -1,7 +1,6 @@
 package manageyourhouse.myh_manageyourhouse;
 
 import android.support.v7.widget.RecyclerView;
-import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,22 +9,21 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import manageyourhouse.myh_manageyourhouse.MainActivity;
 
 public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.MyViewHolder> {
 
-    Pieces Salon = new Pieces("Salon", false, false, 0);
-    Pieces Toilette = new Pieces("Toilette", false, false, 0);
-    Pieces Chambre = new Pieces("Chambre", false, false, 0);
-    Pieces Cuisine = new Pieces("Cuisine", false, false, 0);
+    Pieces salon = new Pieces("Salon", false, false, 0);
+    Pieces toilette = new Pieces("Toilette", false, false, 0);
+    Pieces chambre = new Pieces("Chambre", false, false, 0);
+    Pieces cuisine = new Pieces("Cuisine", false, false, 0);
 
-    List<Pieces> Pieces = Arrays.asList(Salon, Toilette, Chambre, Cuisine);
+    List<Pieces> Pieces = Arrays.asList(salon, toilette, chambre, cuisine);
 
     private final List<String> characters = Arrays.asList(
-            Salon.getName(),
-            Toilette.getName(),
-            Chambre.getName(),
-            Cuisine.getName()
+            salon.getName(),
+            toilette.getName(),
+            chambre.getName(),
+            cuisine.getName()
     );
 
     @Override
@@ -50,6 +48,10 @@ public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.
 
         private final TextView name;
         private String currentPair;
+        private Pieces piece;
+        private String namePiece;
+
+
 
         public MyViewHolder(final View itemView) {
             super(itemView);
@@ -57,14 +59,17 @@ public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    for (int i = 0; i <Pieces.size(); i++){
+                        if (currentPair == Pieces.get(i).getName()){
+                            piece = Pieces.get(i);
+                            namePiece = piece.getName();
+                        }
+                    }
                     try {
-                        MainActivity.client.SendSetStateLight(1);
+                        MainActivity.client.SendSetStateLight(namePiece);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    new AlertDialog.Builder(itemView.getContext())
-                            .setTitle(currentPair)
-                            .show();
                 }
             });
         }

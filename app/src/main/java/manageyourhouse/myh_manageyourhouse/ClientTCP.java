@@ -24,13 +24,9 @@ public class ClientTCP {
         out = new PrintWriter(socket.getOutputStream());
 
     }
-    public void SendSetStateLight(int _Lumiere) throws IOException {
+    public void SendSetStateLight(String piece) throws IOException {
         if (socket.isConnected()) {
-            if (_Lumiere == 1) {
-                out.println("salon");
-            } else if (_Lumiere == 2) {
-                out.println("toilette");
-            }
+            out.println(piece);
             out.flush();
         }
     }
@@ -41,4 +37,3 @@ public class ClientTCP {
         out = new PrintWriter(socket.getOutputStream());
     }
 }
-

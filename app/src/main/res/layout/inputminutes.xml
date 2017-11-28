@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="30dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="200dp"
+    android:layout_height="100dp"
+    android:layout_gravity="center">
 
     <EditText
         android:id="@+id/minutes"
-        android:layout_width="40dp"
+        android:layout_width="70dp"
         android:layout_height="30dp"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
+        android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
-        android:background="@color/GreenButton"
+        android:background="@android:color/background_light"
         android:imeOptions="actionSend"
+        android:hint="@string/minutes"
         android:inputType="text" />
+
 
 
 </LinearLayout>
