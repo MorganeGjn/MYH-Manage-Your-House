@@ -5,4 +5,7 @@
     <string name="AllumerEteindre">Allumer / Éteindre</string>
     <string name="Parametres">Paramètres</string>
     <string name="minutes">Minutes</string>
+    <string name="ok">OK</string>
+    <string name="annuler">Annuler</string>
+    <string name="notification">Notification</string>
 </resources>
