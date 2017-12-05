@@ -1,5 +1,8 @@
 package manageyourhouse.myh_manageyourhouse;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,20 +13,17 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import static manageyourhouse.myh_manageyourhouse.R.color.GreenBack;
+
 public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.MyViewHolder> {
 
-    Pieces salon = new Pieces("Salon", false, false, 0);
-    Pieces toilette = new Pieces("Toilette", false, false, 0);
-    Pieces chambre = new Pieces("Chambre", false, false, 0);
-    Pieces cuisine = new Pieces("Cuisine", false, false, 0);
-
-    List<Pieces> Pieces = Arrays.asList(salon, toilette, chambre, cuisine);
+    List<Pieces> Pieces = Arrays.asList(MainActivity.Salon, MainActivity.Toilette, MainActivity.Chambre, MainActivity.Cuisine);
 
     private final List<String> characters = Arrays.asList(
-            salon.getName(),
-            toilette.getName(),
-            chambre.getName(),
-            cuisine.getName()
+            MainActivity.Salon.getName(),
+            MainActivity.Toilette.getName(),
+            MainActivity.Chambre.getName(),
+            MainActivity.Cuisine.getName()
     );
 
     @Override
@@ -41,6 +41,17 @@ public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         String pair = characters.get(position);
+        Pieces piece = Pieces.get(1);
+        for (int i = 0; i< Pieces.size(); i++){
+            if (pair == Pieces.get(i).getName()) {
+                piece = Pieces.get(i);
+                if (piece.getEtat() == true) {
+                    holder.itemView.setBackgroundColor(Color.YELLOW);
+                } else {
+                    holder.itemView.setBackgroundColor(0xc8f274);
+                }
+            }
+        }
         holder.display(pair);
     }
 
@@ -50,6 +61,7 @@ public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.
         private String currentPair;
         private Pieces piece;
         private String namePiece;
+        private String Reponse;
 
 
 
@@ -66,10 +78,27 @@ public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.
                         }
                     }
                     try {
-                        MainActivity.client.SendSetStateLight(namePiece);
+                        Reponse = MainActivity.client.SendSetStateLight(namePiece);
+                        if (Reponse.equals(1)){
+                            for (int i = 0; i <Pieces.size(); i++){
+                                if (currentPair == Pieces.get(i).getName()){
+                                    Pieces.get(i).setEtat(true);
+
+                                }
+                            }
+                        }
+                        else if(Reponse.equals(0)){
+                            for (int i = 0; i <Pieces.size(); i++){
+                                if (currentPair == Pieces.get(i).getName()){
+                                    Pieces.get(i).setEtat(false);
+
+                                }
+                            }
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+
                 }
             });
         }

@@ -7,28 +7,24 @@
     tools:context="manageyourhouse.myh_manageyourhouse.MainActivity"
     android:background="@color/GreenBack">
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonSonnette"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="256dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="68dp"
+        android:layout_width="126dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="54dp"
         android:background="@color/GreenButton"
-        android:text="@string/Sonnette"
-        android:textColorLink="@android:color/holo_green_dark"
-        android:textSize="18sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:textColorLink="@android:color/holo_green_dark" />
+        app:srcCompat="@mipmap/clochegreenback"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <ImageButton
         android:id="@+id/buttonEclairage"
         android:layout_width="126dp"
         android:layout_height="98dp"
-        android:layout_marginTop="164dp"
+        android:layout_marginTop="206dp"
         android:background="@color/GreenButton"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/idea"
@@ -53,4 +49,8 @@
         tools:layout_editor_absoluteY="434dp"
         tools:layout_editor_absoluteX="151dp" />
 
+
 </android.support.constraint.ConstraintLayout>
+
+<!-- Ajouts de Lamine -->
+

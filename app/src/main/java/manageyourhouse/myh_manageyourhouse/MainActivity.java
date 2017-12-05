@@ -1,5 +1,8 @@
 package manageyourhouse.myh_manageyourhouse;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +18,31 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class MainActivity extends AppCompatActivity {
 
     public static ClientTCP client;
+    public static Pieces Salon = new Pieces("Salon", false, false, 0);
+    public static Pieces Toilette = new Pieces("Toilette", true, false, 0);
+    public static Pieces Chambre = new Pieces("Chambre", false, false, 0);
+    public static Pieces Cuisine = new Pieces("Cuisine", false, false, 0);
+
+/*
+    private final void createNotification(){
+        final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        final Intent launchNotifiactionIntent = new Intent(this, TutoNotificationHomeActivity.class);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(this,
+                REQUEST_CODE, launchNotifiactionIntent,
+                PendingIntent.FLAG_ONE_SHOT);
+
+        Notification.Builder builder = new Notification.Builder(this)
+                .setWhen(System.currentTimeMillis())
+                .setTicker(notificationTitle)
+                .setSmallIcon(R.drawable.notification)
+                .setContentTitle(getResources().getString(R.string.notification_title))
+                .setContentText(getResources().getString(R.string.notification_desc))
+                .setContentIntent(pendingIntent);
+
+        mNotification.notify(NOTIFICATION_ID, builder.build());
+    }
+    */
 
     Handler handler = new Handler() {
         @Override
@@ -52,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final Button ButtonSonnette = (Button) findViewById(R.id.buttonSonnette);
+        final ImageButton ButtonSonnette = (ImageButton) findViewById(R.id.buttonSonnette);
         ButtonSonnette.setOnClickListener(new View.OnClickListener() {
 
             @Override

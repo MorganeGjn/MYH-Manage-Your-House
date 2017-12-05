@@ -67,27 +67,22 @@
 
     </RelativeLayout>
 
-
-    <!--rajout spinner-->
-
-    <!--
-    <RelativeLayout
-        android:layout_width="308dp"
-        android:layout_height="296dp"
-        android:layout_marginTop="186dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context=".MainActivity"
-        android:layout_marginRight="8dp"
+    <!-- Ajouts Lamine -->
+    <Button
+        android:id="@+id/buttonNotif"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="256dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="413dp"
+        android:background="@color/GreenButton"
+        android:text="@string/add_notification"
+        android:textColorLink="@android:color/holo_green_dark"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textColorLink="@android:color/holo_green_dark" />
 
-        <Spinner
-            android:id="@+id/simpleSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="100dp" />
-
-    </RelativeLayout>-->
 </android.support.constraint.ConstraintLayout>

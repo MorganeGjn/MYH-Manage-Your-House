@@ -24,10 +24,14 @@ public class ClientTCP {
         out = new PrintWriter(socket.getOutputStream());
 
     }
-    public void SendSetStateLight(String piece) throws IOException {
+    public String SendSetStateLight(String piece) throws IOException {
         if (socket.isConnected()) {
             out.println(piece);
             out.flush();
+            return in.readLine();
+        }
+        else {
+            return "not connected";
         }
     }
     private void ReConnectTCP() throws UnknownHostException, IOException{

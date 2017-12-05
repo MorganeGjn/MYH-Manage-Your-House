@@ -15,18 +15,13 @@ import java.util.List;
 
 public class MyAdapterParametres extends RecyclerView.Adapter<MyAdapterParametres.MyViewHolder> {
 
-    Pieces Salon = new Pieces("Salon", false, false, 0);
-    Pieces Toilette = new Pieces("Toilette", false, false, 0);
-    Pieces Chambre = new Pieces("Chambre", false, false, 0);
-    Pieces Cuisine = new Pieces("Cuisine", false, false, 0);
-
-    List<Pieces> Pieces = Arrays.asList(Salon, Toilette, Chambre, Cuisine);
+    List<Pieces> Pieces = Arrays.asList(MainActivity.Salon, MainActivity.Toilette, MainActivity.Chambre, MainActivity.Cuisine);
 
     private final List<String> characters = Arrays.asList(
-            Salon.getName(),
-            Toilette.getName(),
-            Chambre.getName(),
-            Cuisine.getName()
+            MainActivity.Salon.getName(),
+            MainActivity.Toilette.getName(),
+            MainActivity.Chambre.getName(),
+            MainActivity.Cuisine.getName()
     );
 
     @Override
