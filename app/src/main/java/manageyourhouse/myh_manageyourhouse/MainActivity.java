@@ -1,8 +1,10 @@
 package manageyourhouse.myh_manageyourhouse;
 
+import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -13,36 +15,53 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainActivity extends AppCompatActivity {
 
     public static ClientTCP client;
+    public static Boolean Connect;
     public static Pieces Salon = new Pieces("Salon", false, false, 0);
     public static Pieces Toilette = new Pieces("Toilette", true, false, 0);
     public static Pieces Chambre = new Pieces("Chambre", false, false, 0);
     public static Pieces Cuisine = new Pieces("Cuisine", false, false, 0);
+    public static int nb = 1;
+    public static AlarmManager am;
 
-/*
-    private final void createNotification(){
-        final NotificationManager mNotification = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+    public static void ajouterAlarme(Context context, int year, int month, int day, int hour, int minute)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, day, hour, minute);
 
-        final Intent launchNotifiactionIntent = new Intent(this, TutoNotificationHomeActivity.class);
-        final PendingIntent pendingIntent = PendingIntent.getActivity(this,
-                REQUEST_CODE, launchNotifiactionIntent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-        Notification.Builder builder = new Notification.Builder(this)
-                .setWhen(System.currentTimeMillis())
-                .setTicker(notificationTitle)
-                .setSmallIcon(R.drawable.notification)
-                .setContentTitle(getResources().getString(R.string.notification_title))
-                .setContentText(getResources().getString(R.string.notification_desc))
-                .setContentIntent(pendingIntent);
-
-        mNotification.notify(NOTIFICATION_ID, builder.build());
+        Intent intent = new Intent(context, TimeAlarm.class);
+        PendingIntent operation = PendingIntent.getBroadcast(context, nb, intent, PendingIntent.FLAG_ONE_SHOT);
+        am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), operation);
+        nb = nb +1;
     }
-    */
+
+    public static void createNotification(Context context){if (android.os.Build.VERSION.SDK_INT >= 26 ) {
+        final NotificationManager mNotification = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+        Notification.Builder builder = new Notification.Builder(context, "Notification1");
+        builder.setWhen(System.currentTimeMillis());
+        builder.setTicker("Notif");
+        builder.setSmallIcon(R.mipmap.logo);
+        builder.setContentTitle("Notif");
+        builder.setContentText("Tu m'embêtes");
+        mNotification.notify(MainActivity.nb, builder.build());
+        MainActivity.nb = MainActivity.nb +1;
+    }
+    else{
+        final NotificationManager mNotification = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
+        Notification.Builder builder = new Notification.Builder(context);
+        builder.setWhen(System.currentTimeMillis());
+        builder.setTicker("Notif");
+        builder.setSmallIcon(R.mipmap.logo);
+        builder.setContentTitle("Notif");
+        builder.setContentText("Tu m'embêtes");
+        mNotification.notify(MainActivity.nb, builder.build());
+        MainActivity.nb = MainActivity.nb +1;
+    }}
 
     Handler handler = new Handler() {
         @Override
@@ -89,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent3);
             }
         });
-
+        am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         }
 
     public void onStart() {
@@ -109,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     try {
                         client = new ClientTCP("192.168.1.1", 12345);
+                        Connect = true;
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -124,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                         handler.sendMessage(myMessage);
                 } catch (Throwable t) {
                     // gérer l'exception et arrêter le traitement
+                    Connect = false;
                 }
             }
         });

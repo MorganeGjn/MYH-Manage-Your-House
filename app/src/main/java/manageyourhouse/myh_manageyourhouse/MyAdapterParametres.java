@@ -1,10 +1,13 @@
 package manageyourhouse.myh_manageyourhouse;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,6 +15,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class MyAdapterParametres extends RecyclerView.Adapter<MyAdapterParametres.MyViewHolder> {
 
@@ -83,14 +88,34 @@ public class MyAdapterParametres extends RecyclerView.Adapter<MyAdapterParametre
                         public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
                             if (isChecked) {
                                 // If the user checked the item, add it to the selected items
+                                /*Pieces piece = Pieces.get(1);
+                                for (int i = 0; i <Pieces.size(); i++){
+                                    if (currentPair == Pieces.get(i).getName()){
+                                        piece = Pieces.get(i);
+                                    }
+                                }
+                                String text = edit.getText().toString();
+                                piece.setMinutes(Integer.parseInt(text));
+                                piece.setEtat(true);*/
+                                //MainActivity.ajouterAlarme(itemView.getContext(),2017,12,10,12,50);
                                 seletedItems.add(indexSelected);
+
+                                MainActivity.createNotification(itemView.getContext());
                             }
                             else if (seletedItems.contains(indexSelected)) {
                                 // Else, if the item is already in the array, remove it
+                                /*Pieces piece = Pieces.get(1);
+                                for (int i = 0; i <Pieces.size(); i++){
+                                    if (currentPair == Pieces.get(i).getName()){
+                                        piece = Pieces.get(i);
+                                    }
+                                }*/
                                 seletedItems.remove(Integer.valueOf(indexSelected));
+                                //piece.setEtat(false);
                             }
                         }
                     });
+
                     dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {

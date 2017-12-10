@@ -23,6 +23,7 @@
         <activity android:name=".Eclairage" />
         <activity android:name=".Parametres" />
         <activity android:name=".Sonnette" />
+        <activity android:name=".MjpegSample" />
     </application>
 
 </manifest>

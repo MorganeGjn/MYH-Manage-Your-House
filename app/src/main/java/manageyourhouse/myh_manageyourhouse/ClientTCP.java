@@ -28,7 +28,7 @@ public class ClientTCP {
         if (socket.isConnected()) {
             out.println(piece);
             out.flush();
-            return in.readLine();
+            return "ok";//in.readLine();
         }
         else {
             return "not connected";

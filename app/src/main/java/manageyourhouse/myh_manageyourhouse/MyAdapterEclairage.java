@@ -1,7 +1,5 @@
 package manageyourhouse.myh_manageyourhouse;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,8 +10,6 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
-import static manageyourhouse.myh_manageyourhouse.R.color.GreenBack;
 
 public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.MyViewHolder> {
 
@@ -59,15 +55,15 @@ public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.
 
         private final TextView name;
         private String currentPair;
-        private Pieces piece;
+        private Pieces piece = Pieces.get(1);
         private String namePiece;
         private String Reponse;
-
 
 
         public MyViewHolder(final View itemView) {
             super(itemView);
             name = ((TextView) itemView.findViewById(R.id.name));
+            namePiece = piece.getName();
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -77,13 +73,14 @@ public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.
                             namePiece = piece.getName();
                         }
                     }
-                    try {
-                        Reponse = MainActivity.client.SendSetStateLight(namePiece);
-                        if (Reponse.equals(1)){
+                    if(MainActivity.Connect == false) {
+                        try {
+
+                            MainActivity.client.SendSetStateLight(namePiece);
+                        /*if (Reponse.equals(1)){
                             for (int i = 0; i <Pieces.size(); i++){
                                 if (currentPair == Pieces.get(i).getName()){
                                     Pieces.get(i).setEtat(true);
-
                                 }
                             }
                         }
@@ -91,12 +88,12 @@ public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.
                             for (int i = 0; i <Pieces.size(); i++){
                                 if (currentPair == Pieces.get(i).getName()){
                                     Pieces.get(i).setEtat(false);
-
                                 }
                             }
+                        }*/
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
-                    } catch (IOException e) {
-                        e.printStackTrace();
                     }
 
                 }
