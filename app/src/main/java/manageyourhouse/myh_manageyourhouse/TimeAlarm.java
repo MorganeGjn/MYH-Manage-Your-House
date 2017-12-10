@@ -10,6 +10,14 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class TimeAlarm extends BroadcastReceiver {
 
+    public static String Titre;
+    public static String message;
+
+    public static void changeNotification(String t, String m){
+        Titre = t;
+        message = m;
+    }
+
     @Override
     public void onReceive(Context context, Intent intent) {
         if (android.os.Build.VERSION.SDK_INT >= 26 ) {

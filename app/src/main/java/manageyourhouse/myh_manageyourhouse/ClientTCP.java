@@ -16,6 +16,7 @@ public class ClientTCP {
     private String HostAddr = null;
     private int Port = 0;
 
+
     public ClientTCP(String _HostAddr,int _Port) throws UnknownHostException, IOException{
         HostAddr = _HostAddr;
         Port = _Port;
@@ -28,7 +29,13 @@ public class ClientTCP {
         if (socket.isConnected()) {
             out.println(piece);
             out.flush();
-            return "ok";//in.readLine();
+            String mess = in.readLine();
+            if(mess.equals("OK")){
+                return "1";
+            }
+            else {
+                return "0";
+            }
         }
         else {
             return "not connected";

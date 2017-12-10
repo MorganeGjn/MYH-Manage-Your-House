@@ -88,7 +88,7 @@ public class MyAdapterParametres extends RecyclerView.Adapter<MyAdapterParametre
                         public void onClick(DialogInterface dialog, int indexSelected, boolean isChecked) {
                             if (isChecked) {
                                 // If the user checked the item, add it to the selected items
-                                /*Pieces piece = Pieces.get(1);
+                                Pieces piece = Pieces.get(1);
                                 for (int i = 0; i <Pieces.size(); i++){
                                     if (currentPair == Pieces.get(i).getName()){
                                         piece = Pieces.get(i);
@@ -96,10 +96,10 @@ public class MyAdapterParametres extends RecyclerView.Adapter<MyAdapterParametre
                                 }
                                 String text = edit.getText().toString();
                                 piece.setMinutes(Integer.parseInt(text));
-                                piece.setEtat(true);*/
+                                piece.setEtat(true);
                                 //MainActivity.ajouterAlarme(itemView.getContext(),2017,12,10,12,50);
                                 seletedItems.add(indexSelected);
-
+                                //TimeAlarm.changeNotification(piece.getName());
                                 MainActivity.createNotification(itemView.getContext());
                             }
                             else if (seletedItems.contains(indexSelected)) {
@@ -131,15 +131,15 @@ public class MyAdapterParametres extends RecyclerView.Adapter<MyAdapterParametre
                     });
                     AlertDialog b = dialogBuilder.create();
                     b.show();
-
+                    if (seletedItems.size() != 0) {
+                        piece.setNotification(true);
+                    }
+                    else{
+                        piece.setNotification(false);
+                    }
                 }
             });
-            if (seletedItems.size() != 0) {
-                piece.setNotification(true);
-            }
-            else{
-                piece.setNotification(false);
-            }
+
         }
 
         public void display(String pair) {

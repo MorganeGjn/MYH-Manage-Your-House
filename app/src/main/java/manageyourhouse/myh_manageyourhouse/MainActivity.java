@@ -108,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent3);
             }
         });
-        am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        //am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        //ajouterAlarme(MainActivity.this, 2017, 12, 10, 14, 40);
         }
 
     public void onStart() {
@@ -142,6 +143,40 @@ public class MainActivity extends AppCompatActivity {
                         myMessage.setData(messageBundle);
                         //Envoyer le message
                         handler.sendMessage(myMessage);
+                } catch (Throwable t) {
+                    // gérer l'exception et arrêter le traitement
+                    Connect = false;
+                }
+            }
+        });
+        Thread reception = new Thread(new Runnable() {
+            /**
+             * Le Bundle qui porte les données du Message et sera transmis au Handler
+             */
+            Bundle messageBundle=new Bundle();
+            /**
+             * Le message échangé entre la Thread et le Handler
+             */
+            Message myMessage;
+            // Surcharge de la méthode run
+            public void run() {
+                try {
+                    /*try {
+                        client = new ClientTCP("192.168.1.1", 12345);
+                        Connect = true;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }*/
+                    // Envoyer le message au Handler (la méthode handler.obtainMessage est plus efficace
+                    // que créer un message à partir de rien, optimisation du pool de message du Handler)
+                    //Instanciation du message (la bonne méthode):
+                    myMessage=handler.obtainMessage();
+                    //Ajouter des données à transmettre au Handler via le Bundle
+                    messageBundle.putInt("1",1);
+                    //Ajouter le Bundle au message
+                    myMessage.setData(messageBundle);
+                    //Envoyer le message
+                    handler.sendMessage(myMessage);
                 } catch (Throwable t) {
                     // gérer l'exception et arrêter le traitement
                     Connect = false;

@@ -73,8 +73,7 @@ public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.
                             namePiece = piece.getName();
                         }
                     }
-                    if(MainActivity.Connect == false) {
-                        try {
+                    try {
 
                             MainActivity.client.SendSetStateLight(namePiece);
                         /*if (Reponse.equals(1)){
@@ -94,7 +93,6 @@ public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    }
 
                 }
             });
