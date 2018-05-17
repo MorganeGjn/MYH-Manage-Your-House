@@ -1,5 +1,6 @@
 package manageyourhouse.myh_manageyourhouse;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,5 +18,6 @@ public class Eclairage extends AppCompatActivity {
         final RecyclerView rv = (RecyclerView) findViewById(R.id.ListePiece);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new MyAdapterEclairage());
+
     }
 }

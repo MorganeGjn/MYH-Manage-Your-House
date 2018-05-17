@@ -1,32 +1,26 @@
 package manageyourhouse.myh_manageyourhouse;
 
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.support.v7.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class MyAdapterParametres extends RecyclerView.Adapter<MyAdapterParametres.MyViewHolder> {
 
-    List<Pieces> Pieces = Arrays.asList(MainActivity.Salon, MainActivity.Toilette, MainActivity.Chambre, MainActivity.Cuisine);
+    List<Pieces> Pieces = Arrays.asList(MainActivity.Salon, MainActivity.Toilette, MainActivity.Chambre);
 
     private final List<String> characters = Arrays.asList(
             MainActivity.Salon.getName(),
             MainActivity.Toilette.getName(),
-            MainActivity.Chambre.getName(),
-            MainActivity.Cuisine.getName()
+            MainActivity.Chambre.getName()
     );
 
     @Override
@@ -56,12 +50,7 @@ public class MyAdapterParametres extends RecyclerView.Adapter<MyAdapterParametre
         public MyViewHolder(final View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
-            Pieces piece = Pieces.get(1);
-            for (int i = 0; i <Pieces.size(); i++){
-                if (currentPair == Pieces.get(i).getName()){
-                    piece = Pieces.get(i);
-                }
-            }
+
             final ArrayList seletedItems = new ArrayList();
             itemView.setOnClickListener(new View.OnClickListener() {
 
@@ -96,22 +85,22 @@ public class MyAdapterParametres extends RecyclerView.Adapter<MyAdapterParametre
                                 }
                                 String text = edit.getText().toString();
                                 piece.setMinutes(Integer.parseInt(text));
-                                piece.setEtat(true);
-                                //MainActivity.ajouterAlarme(itemView.getContext(),2017,12,10,12,50);
+                                piece.setNotification(true);
+                                if(piece.getEtat()==true) {
+                                    ServiceSocketSonnette.scheduleNotification(itemView.getContext(), piece.getMinutes() * 60000);
+                                }
                                 seletedItems.add(indexSelected);
-                                //TimeAlarm.changeNotification(piece.getName());
-                                MainActivity.createNotification(itemView.getContext());
                             }
                             else if (seletedItems.contains(indexSelected)) {
                                 // Else, if the item is already in the array, remove it
-                                /*Pieces piece = Pieces.get(1);
+                                Pieces piece = Pieces.get(1);
                                 for (int i = 0; i <Pieces.size(); i++){
                                     if (currentPair == Pieces.get(i).getName()){
                                         piece = Pieces.get(i);
                                     }
-                                }*/
+                                }
                                 seletedItems.remove(Integer.valueOf(indexSelected));
-                                //piece.setEtat(false);
+                                piece.setNotification(false);
                             }
                         }
                     });

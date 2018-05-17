@@ -1,5 +1,7 @@
 package manageyourhouse.myh_manageyourhouse;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,8 +12,8 @@ import java.net.*;
 
 public class ClientTCP {
 
-    private Socket socket;
-    private BufferedReader in = null;
+    public Socket socket;
+    public BufferedReader in = null;
     private PrintWriter out = null;
     private String HostAddr = null;
     private int Port = 0;
@@ -29,13 +31,7 @@ public class ClientTCP {
         if (socket.isConnected()) {
             out.println(piece);
             out.flush();
-            String mess = in.readLine();
-            if(mess.equals("OK")){
-                return "1";
-            }
-            else {
-                return "0";
-            }
+            return "ok";
         }
         else {
             return "not connected";

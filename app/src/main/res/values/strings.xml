@@ -11,4 +11,6 @@
     <string name="notification">Notification ManageYourHouse</string>
     <string name="notification_title">Lumieres!</string>
     <string name="notification_desc">ouais notif rpz</string>
+    <string name="url">http://192.168.1.1:8082/html</string>
+    <string name="Porte">Bouton porte</string>
 </resources>

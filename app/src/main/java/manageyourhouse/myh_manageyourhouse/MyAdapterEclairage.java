@@ -2,24 +2,25 @@ package manageyourhouse.myh_manageyourhouse;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import static java.lang.Thread.sleep;
 
 public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.MyViewHolder> {
 
-    List<Pieces> Pieces = Arrays.asList(MainActivity.Salon, MainActivity.Toilette, MainActivity.Chambre, MainActivity.Cuisine);
+    List<Pieces> Pieces = Arrays.asList(MainActivity.Salon, MainActivity.Toilette, MainActivity.Chambre);
 
     private final List<String> characters = Arrays.asList(
             MainActivity.Salon.getName(),
             MainActivity.Toilette.getName(),
-            MainActivity.Chambre.getName(),
-            MainActivity.Cuisine.getName()
+            MainActivity.Chambre.getName()
     );
 
     @Override
@@ -57,11 +58,15 @@ public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.
         private String currentPair;
         private Pieces piece = Pieces.get(1);
         private String namePiece;
-        private String Reponse;
 
 
         public MyViewHolder(final View itemView) {
             super(itemView);
+            if (piece.getEtat() == true) {
+                itemView.setBackgroundColor(Color.YELLOW);
+            } else {
+                itemView.setBackgroundColor(0xc8f274);
+            }
             name = ((TextView) itemView.findViewById(R.id.name));
             namePiece = piece.getName();
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -73,27 +78,28 @@ public class MyAdapterEclairage extends RecyclerView.Adapter<MyAdapterEclairage.
                             namePiece = piece.getName();
                         }
                     }
-                    try {
-
-                            MainActivity.client.SendSetStateLight(namePiece);
-                        /*if (Reponse.equals(1)){
-                            for (int i = 0; i <Pieces.size(); i++){
-                                if (currentPair == Pieces.get(i).getName()){
-                                    Pieces.get(i).setEtat(true);
-                                }
+                    if(ServiceSocket.client.socket.isConnected()) {
+                        try {
+                            ServiceSocket.client.SendSetStateLight(namePiece);
+                            sleep(500);
+                            if(piece.getEtat() == true && piece.getNotifiation() == true) {
+                                ServiceSocketSonnette.scheduleNotification(itemView.getContext(), piece.getMinutes() * 60000);
                             }
-                        }
-                        else if(Reponse.equals(0)){
-                            for (int i = 0; i <Pieces.size(); i++){
-                                if (currentPair == Pieces.get(i).getName()){
-                                    Pieces.get(i).setEtat(false);
-                                }
-                            }
-                        }*/
                         } catch (IOException e) {
                             e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
-
+                    }
+                    else{
+                        Toast toast = Toast.makeText(itemView.getContext(), "Non Connecté", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                    if (piece.getEtat() == true) {
+                        itemView.setBackgroundColor(Color.YELLOW);
+                    } else {
+                        itemView.setBackgroundColor(0xc8f274);
+                    ;}
                 }
             });
         }
